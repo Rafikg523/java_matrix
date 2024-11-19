@@ -1,18 +1,30 @@
 package zad1;
 
 public class Matrix {
-	private int matrix[][];
+	private int dane[][]; //row col
+	private int row;
+	private int col;
 	
 	Matrix(int a, int b){
-		setMatrix(new int[a][b]);
+		this.row = a;
+		this.col = b;
+		
+		dane = new int[a][b];
 	}
-
-	public int[][] getMatrix() {
-		return matrix;
+	
+	public int getCol() {
+		return this.col;
 	}
-
-	public void setMatrix(int matrix[][]) {
-		this.matrix = matrix;
+	
+	public int getRow() {
+		return this.row;
 	}
-
+	
+	public void setValue(int i, int j, int value) {
+		dane[i][j] = value;
+	}
+	
+	public int getValue(int i, int j) {
+		return dane[i][j];
+	}
 }

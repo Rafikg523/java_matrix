@@ -6,108 +6,121 @@ import java.util.*;
 
 public class Controller {
 	
-	private static Scanner scan = new Scanner(System.in);
+	private View view;
+	private Model model;
 	
-	public static void controller() {
-		
-		int choice = 0;
-		do {
-			View.menu();
+    private Matrix A;
+    private Matrix B;
+    private Matrix C;
+    
+    public Controller() {
+    	view =  new View();
+    	model = new Model();
+    	
+    }
+	
+	public void start() {
+
+		boolean exit = false;
+		while (!exit) {
 			
-			choice = scan.nextInt();
+			view.menu();
+			int choice = view.getInput("Podaj wybor: ");
 			
 			switch (choice) {
-			case 1:
-				int[] wym = Controller.inputWym(); 
-				Matrix A = new Matrix(wym[1],wym[2]);
-				Matrix B = new Matrix(wym[2],wym[1]);
-				
-				
+			case 1:				
+				inputMatrix();
 				break;
 			case 2:
-				Controller.menu2();
+				menu2();
 				break;
 			case 3:
-				Controller.menu3();
+				menu3();
 				break;
 			case 0:
-				return;
+				exit = true;
+				break;
 			default:
 				continue;
-				
 			}
-				
-			
-		} while (choice != 0);
+		}
 		
+		view.end();
 	}
 	
-	public static void menu2() {
+	public void menu2() {
 		
-		int choice = 0;
-		do {
-			View.menu2();
-			
-			choice = scan.nextInt();
+		if (A == null || B == null) {
+			view.noInputMatrix();
+			return;
+		}
+		
+		while(true) {
+
+			view.menu2();
+			int choice = view.getInput("Podaj wybor: ");
 			
 			switch (choice) {
 			case 1:
-				//transponuj m in
+				model.transposeInput(A, B);
 				break;
 			case 2:
-				//mnozenie
+				C = new Matrix(A.getRow(),B.getCol());
+				model.multiply(A, B, C);
 				break;
 			case 3:
-				//transponuj m out
+				model.transposeOutput(C);
 				break;
 			case 0:
 				return;
-				
 			default:
 				continue;	
 			}
-				
-			
-		} while (choice != 0);
+		}
 	}
 	
-	public static void menu3() {
+	public void menu3() {
 		
-		int choice = 0;
-		do {
-			View.menu3();
+		if (A == null || B == null) {
+			view.noInputMatrix();
+			return;
+		}
+		
+		while(true) {
 			
-			choice = scan.nextInt();
+			view.menu3();
+			int choice = view.getInput("Podaj wybor: ");
 			
 			switch (choice) {
 			case 1:
-				//print m in
+				view.printMatrix(A, "A");
+				view.printMatrix(B, "B");
 				break;
 			case 2:
-				//print m out
+				if (C == null) {
+					view.noOutputMatrix();
+					continue;
+				}
+				view.printMatrix(C, "C");
 				break;
 			case 0:
 				return;
-				
 			default:
 				continue;					
 			}
-				
-			
-		} while (choice != 0);
+		}
 	}
 	
-	public static int[] inputWym() {
+	
+	public void inputMatrix() {
+		int m = view.getInput("Podaj wymiar m: ");
+		int k = view.getInput("Podaj wymiar k: ");
 		
-		View.podajWym();
-		int m = scan.nextInt();
-		int k = scan.nextInt();
+		A = new Matrix(m,k);
+		B = new Matrix(k,m);
 		
-		int[] x = new int[2];
-		x[1] = m;
-		x[2] = k;
-		
-		return x;
+		view.inputMatrixData(A, "A");
+		view.inputMatrixData(B, "B");
 	}
 	
 	
