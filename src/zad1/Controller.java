@@ -32,9 +32,17 @@ public class Controller {
 				inputMatrix();
 				break;
 			case 2:
+				if (A == null || B == null) {
+					view.noInputMatrix();
+					return;
+				}
 				menu2();
 				break;
 			case 3:
+				if (A == null || B == null) {
+					view.noInputMatrix();
+					return;
+				}
 				menu3();
 				break;
 			case 0:
@@ -49,11 +57,6 @@ public class Controller {
 	}
 	
 	public void menu2() {
-		
-		if (A == null || B == null) {
-			view.noInputMatrix();
-			return;
-		}
 		
 		while(true) {
 
@@ -80,11 +83,6 @@ public class Controller {
 	}
 	
 	public void menu3() {
-		
-		if (A == null || B == null) {
-			view.noInputMatrix();
-			return;
-		}
 		
 		while(true) {
 			
