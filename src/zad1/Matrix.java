@@ -9,7 +9,7 @@ public class Matrix {
 		this.row = a;
 		this.col = b;
 		
-		dane = new int[a][b];
+		this.dane = new int[a][b];
 	}
 	
 	public int getCol() {
@@ -27,4 +27,9 @@ public class Matrix {
 	public int getValue(int i, int j) {
 		return dane[i][j];
 	}
+	
+	public int[][] getDane(){
+		return dane;
+	}
+	
 }

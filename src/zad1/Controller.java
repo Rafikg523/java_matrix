@@ -1,9 +1,5 @@
 package zad1;
 
-import java.util.*;
-
-
-
 public class Controller {
 	
 	private View view;
@@ -34,14 +30,14 @@ public class Controller {
 			case 2:
 				if (A == null || B == null) {
 					view.noInputMatrix();
-					return;
+					continue;
 				}
 				menu2();
 				break;
 			case 3:
 				if (A == null || B == null) {
 					view.noInputMatrix();
-					return;
+					continue;
 				}
 				menu3();
 				break;
@@ -49,6 +45,7 @@ public class Controller {
 				exit = true;
 				break;
 			default:
+				view.noOption();
 				continue;
 			}
 		}
@@ -65,18 +62,20 @@ public class Controller {
 			
 			switch (choice) {
 			case 1:
-				model.transposeInput(A, B);
+				A = model.transposeMatrix(A);
+				B= model.transposeMatrix(B);
 				break;
 			case 2:
 				C = new Matrix(A.getRow(),B.getCol());
-				model.multiply(A, B, C);
+				C = model.multiply(A, B);
 				break;
 			case 3:
-				model.transposeOutput(C);
+				C = model.transposeMatrix(C);
 				break;
 			case 0:
 				return;
 			default:
+				view.noOption();
 				continue;	
 			}
 		}
@@ -104,6 +103,7 @@ public class Controller {
 			case 0:
 				return;
 			default:
+				view.noOption();
 				continue;					
 			}
 		}

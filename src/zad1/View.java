@@ -35,11 +35,21 @@ public class View {
 	
 	public void end() {
 		scanner.close();
+		System.out.println("END");
 	}
 	
 	public int getInput(String text) {
+		
 		System.out.print(text);
-		return scanner.nextInt();
+		while (!scanner.hasNextInt()) {
+			System.err.println("Wprwoadz liczbe!");
+			scanner.next();
+		}
+		
+		int v = scanner.nextInt();
+		scanner.nextLine();
+		
+		return v;
 	}
 	
 	public void inputMatrixData(Matrix m, String name) {
@@ -61,15 +71,18 @@ public class View {
 			}
 			System.out.print("|\n");
 		}
-		System.out.println();
 	}
 	
 	public void noInputMatrix() {
-		System.out.println("Najpeirw wprowadz macierze!");
+		System.err.println("Brak macierzy wejściowych!");
 	}
 	
 	public void noOutputMatrix() {
-		System.out.println("Brak macierzy wynikowej!");
+		System.err.println("Brak macierzy wynikowej!");
+	}
+	
+	public void noOption() {
+		System.err.println("Nie ma takiej pozycji!");
 	}
 
 	
